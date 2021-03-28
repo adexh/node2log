@@ -1,0 +1,17 @@
+{
+    "app_base_dir" : "/home/app_server/src/",               //base directory of application code.
+    "output_file" : "/home/app_server/log/output.log",      //file to log output
+    "error_file" : "/home/app_server/log/error.log",        //file to log error
+    "log_level" : "LOG_INFO_LEVEL",                         //logging level
+    "format_string" : ""
+}
+
+/*log levels in non-increasing order of verbosity are : 
+    LOG_TRACE_LEVEL  
+    LOG_DEBUG_LEVEL  
+    LOG_INFO_LEVEL  
+    LOG_WARN_LEVEL  
+    LOG_ERROR_LEVEL  
+    LOG_FATAL_LEVEL  
+    LOG_NONE_LEVEL   
+    */
