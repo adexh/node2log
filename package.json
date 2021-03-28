@@ -1,7 +1,7 @@
 {
-  "name": "logger",
+  "name": "node2log",
   "version": "1.0.0",
-  "description": "logging library",
+  "description": "logging library for node projects",
   "main": "logger.js",
   "directories": {
     "test": "test"
@@ -11,11 +11,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/ankushTripathi/node-logger.git"
+    "url": "https://github.com/ankushTripathi/node2log.git"
   },
   "keywords": [
     "nodejs",
-    "logger"
+    "logger",
+    "logging",
+    "log"
   ],
   "author": "Ankush Tripathi",
   "license": "MIT",
