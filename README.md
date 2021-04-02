@@ -17,7 +17,7 @@ It uses a simple json configuration file to set logging properties.
 
 # Installation
 
-`npm install --save logger`
+`npm install --save node2log`
 
 # Ussage
 
@@ -82,4 +82,4 @@ logger.fatal('caught exception in db.connect, exiting');
 
 # License
 
-Logger is available under the [MIT license](https://opensource.org/licenses/MIT). Logger also includes external libraries that are available under a variety of licenses. See [LICENSE](https://github.com/ankushTripathi/node2log/blob/master/LICENSE) for the full license text.
+node2log is available under the [MIT license](https://opensource.org/licenses/MIT). node2log also includes external libraries that are available under a variety of licenses. See [LICENSE](https://github.com/ankushTripathi/node2log/blob/master/LICENSE) for the full license text.
