@@ -1,21 +1,23 @@
 const assert = require('assert');
 const { Console }  = require('console');
 const path = require('path');
-
-const LOG_LEVELS = {
-    LOG_TRACE_LEVEL : 1,  
-    LOG_DEBUG_LEVEL : 2, 
-    LOG_INFO_LEVEL : 3,  
-    LOG_WARN_LEVEL : 4,
-    LOG_ERROR_LEVEL : 5,
-    LOG_FATAL_LEVEL : 6,  
-    LOG_NONE_LEVEL : 7,
-};
+const fs = require('fs');
       
 class Logger{
 
+    static LOG_LEVELS = {
+        LOG_TRACE_LEVEL : 1,  
+        LOG_DEBUG_LEVEL : 2, 
+        LOG_INFO_LEVEL : 3,  
+        LOG_WARN_LEVEL : 4,
+        LOG_ERROR_LEVEL : 5,
+        LOG_FATAL_LEVEL : 6,  
+        LOG_NONE_LEVEL : 7,
+    };
+
     constructor(properties_file){
 
+        assert(properties_file != undefined, Error("please provide config file name"));
         assert(path.extname(properties_file) === ".json","please provide json propeties file, check logProperties.json.example");
 
         const properties = require(properties_file);
@@ -24,7 +26,7 @@ class Logger{
         assert(properties.hasOwnProperty('output_file') && properties.output_file.length > 0, "output_file property required, check logProperties.json.example");
         assert(properties.hasOwnProperty('error_file') && properties.error_file.length > 0, "error_file property required, check logProperties.json.example");
         assert(properties.hasOwnProperty('log_level') && properties.log_level.length > 0, "log_level property required, check logProperties.json.example");
-        assert(LOG_LEVELS.hasOwnProperty(properties.log_level),"please provide proper log level, check logProperties.json.example log_level provided is "+properties.log_level);
+        assert(Logger.LOG_LEVELS.hasOwnProperty(properties.log_level),"please provide proper log level, check logProperties.json.example log_level provided is "+properties.log_level);
         
 
         const out_stream = fs.createWriteStream(properties.output_file,{
@@ -35,10 +37,10 @@ class Logger{
         });
 
         this.logger = new Console(out_stream,err_stream,false);
-        this.log_level = LOG_LEVELS[properties.log_level];
+        this.log_level = Logger.LOG_LEVELS[properties.log_level];
         this.app_base_dir = properties.app_base_dir;
 
-        if(this.log_level != LOG_LEVELS.LOG_NONE_LEVEL){
+        if(this.log_level != Logger.LOG_LEVELS.LOG_NONE_LEVEL){
 
             require('./attachStack');
         }
@@ -46,7 +48,7 @@ class Logger{
 
     log(level_display,msg){
 
-        if(this.log_level === LOG_LEVELS.LOG_NONE_LEVEL)
+        if(this.log_level === Logger.LOG_LEVELS.LOG_NONE_LEVEL)
             return ;
 
         let options = {year : 'numeric', month : 'long', day : 'numeric',  hour: 'numeric', minute: 'numeric', second: 'numeric', fractionalSecondDigits : 3};
@@ -65,7 +67,7 @@ class Logger{
 
     trace(msg){
 
-        if(this.log_level <= LOG_LEVELS.LOG_TRACE_LEVEL){
+        if(this.log_level <= Logger.LOG_LEVELS.LOG_TRACE_LEVEL){
 
             this.log("TRACE",msg);
         }
@@ -73,7 +75,7 @@ class Logger{
 
     debug(msg){
 
-        if(this.log_level <= LOG_LEVELS.LOG_DEBUG_LEVEL){
+        if(this.log_level <= Logger.LOG_LEVELS.LOG_DEBUG_LEVEL){
 
             this.log("DEBUG",msg);
         }
@@ -81,7 +83,7 @@ class Logger{
 
     info(msg){
 
-        if(this.log_level <= LOG_LEVELS.LOG_INFO_LEVEL){
+        if(this.log_level <= Logger.LOG_LEVELS.LOG_INFO_LEVEL){
 
             this.log("INFO",msg);
         }
@@ -89,7 +91,7 @@ class Logger{
 
     warn(msg){
 
-        if(this.log_level <= LOG_LEVELS.LOG_WARN_LEVEL){
+        if(this.log_level <= Logger.LOG_LEVELS.LOG_WARN_LEVEL){
 
             this.log("WARN",msg);
         }
@@ -97,7 +99,7 @@ class Logger{
 
     error(msg){
 
-        if(this.log_level <= LOG_LEVELS.LOG_ERROR_LEVEL){
+        if(this.log_level <= Logger.LOG_LEVELS.LOG_ERROR_LEVEL){
             
             this.log("ERROR",msg);
         }
@@ -105,14 +107,11 @@ class Logger{
 
     fatal(msg){
 
-        if(this.log_level <= LOG_LEVELS.LOG_FATAL_LEVEL){
+        if(this.log_level <= Logger.LOG_LEVELS.LOG_FATAL_LEVEL){
 
             this.log("FATAL",msg);
         }
     }
 }
 
-module.exports = {
-
-    Logger
-}
+module.exports = Logger;
