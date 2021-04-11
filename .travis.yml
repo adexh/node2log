@@ -5,4 +5,4 @@ install:
   - mkdir -p test/log
   - npm install
 
-after_success: npm run coverages
+after_success: npm run coverage
