@@ -1,4 +1,5 @@
 # Node2Log
+[![NPM](https://nodei.co/npm/node2log.png?compact=true)](https://nodei.co/npm/node2log/)
 
 [![Build Status](https://travis-ci.com/ankushTripathi/node2log.svg?branch=master)](https://travis-ci.com/ankushTripathi/node2log)
 [![Coverage Status](https://coveralls.io/repos/github/ankushTripathi/node2log/badge.svg?branch=master)](https://coveralls.io/github/ankushTripathi/node2log?branch=master)
