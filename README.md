@@ -1,6 +1,9 @@
 # Node2Log
 
 [![Build Status](https://travis-ci.com/ankushTripathi/node2log.svg?branch=master)](https://travis-ci.com/ankushTripathi/node2log)
+[![Coverage Status](https://coveralls.io/repos/github/ankushTripathi/node2log/badge.svg?branch=master)](https://coveralls.io/github/ankushTripathi/node2log?branch=master)
+[![Maintainability](https://api.codeclimate.com/v1/badges/a102b6e0776ac121ae11/maintainability)](https://codeclimate.com/github/ankushTripathi/node2log/maintainability)
+[![Known Vulnerabilities](https://snyk.io/test/npm/node2log/1.0.1/badge.svg)](https://snyk.io/test/npm/node2log/1.0.1)
 
 # What is this?
 
