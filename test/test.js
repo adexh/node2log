@@ -23,9 +23,9 @@ describe('Logger',() => {
       
                   let filepath = __dirname+'/node2log.properties';
                   let data = {
-                      app_base_dir : '/home/ankush/Documents/Projects/Nodejs/libs/node2log/test/',
-                      output_file : '/home/ankush/Documents/Projects/Nodejs/libs/node2log/test/log/output.log',
-                      error_file : '/home/ankush/Documents/Projects/Nodejs/libs/node2log/test/log/error.log',
+                      app_base_dir : __dirname,
+                      output_file : __dirname+'/log/output.log',
+                      error_file : __dirname+'/log/error.log',
                       log_level : 'LOG_INFO_LEVEL'
                       };
       
@@ -44,8 +44,8 @@ describe('Logger',() => {
       
                   let filepath = __dirname + '/node2log.json';
                   let data = {
-                      output_file : '/home/ankush/Documents/Projects/Nodejs/libs/node2log/test/log/output.log',
-                      error_file : '/home/ankush/Documents/Projects/Nodejs/libs/node2log/test/log/error.log',
+                      output_file : __dirname+'/log/output.log',
+                      error_file : __dirname+'/log/error.log',
                       log_level : 'LOG_INFO_LEVEL'
                       };
       
@@ -66,8 +66,8 @@ describe('Logger',() => {
                   let filepath = __dirname + '/node2log1.json';
                   let data = {
                       app_base_dir : '',
-                      output_file : '/home/ankush/Documents/Projects/Nodejs/libs/node2log/test/log/output.log',
-                      error_file : '/home/ankush/Documents/Projects/Nodejs/libs/node2log/test/log/error.log',
+                      output_file : __dirname+'/log/output.log',
+                      error_file : __dirname+'/log/error.log',
                       log_level : 'LOG_INFO_LEVEL'
                   };
       
@@ -84,8 +84,8 @@ describe('Logger',() => {
       
                   let filepath = __dirname + '/node2log2.json';
                   let data = {
-                      app_base_dir : '/home/ankush/Documents/Projects/Nodejs/libs/node2log/test/',                
-                      error_file : '/home/ankush/Documents/Projects/Nodejs/libs/node2log/test/log/error.log',
+                      app_base_dir : __dirname,                
+                      error_file : __dirname+'/log/error.log',
                       log_level : 'LOG_INFO_LEVEL'
                   };
 
@@ -103,9 +103,9 @@ describe('Logger',() => {
       
                   let filepath = __dirname + '/node2log3.json';
                   let data = {
-                      app_base_dir : '/home/ankush/Documents/Projects/Nodejs/libs/node2log/test/',  
+                      app_base_dir : __dirname,  
                       output_file : '',              
-                      error_file : '/home/ankush/Documents/Projects/Nodejs/libs/node2log/test/log/error.log',
+                      error_file : __dirname+'/log/error.log',
                       log_level : 'LOG_INFO_LEVEL'
                   };
 
@@ -122,8 +122,8 @@ describe('Logger',() => {
       
                   let filepath = __dirname + '/node2log4.json';
                   let data = {
-                      app_base_dir : '/home/ankush/Documents/Projects/Nodejs/libs/node2log/test/',  
-                      output_file : '/home/ankush/Documents/Projects/Nodejs/libs/node2log/test/log/output.log',              
+                      app_base_dir : __dirname,  
+                      output_file : __dirname+'/log/output.log',              
                       log_level : 'LOG_INFO_LEVEL'
                   };
 
@@ -140,8 +140,8 @@ describe('Logger',() => {
       
                   let filepath = __dirname + '/node2log5.json';
                   let data = {
-                      app_base_dir : '/home/ankush/Documents/Projects/Nodejs/libs/node2log/test/',  
-                      output_file : '/home/ankush/Documents/Projects/Nodejs/libs/node2log/test/log/output.log',
+                      app_base_dir : __dirname,  
+                      output_file : __dirname+'/log/output.log',
                       error_file : '',   
                       log_level : 'LOG_INFO_LEVEL'
                   };
@@ -159,9 +159,9 @@ describe('Logger',() => {
       
                   let filepath = __dirname + '/node2log6.json';
                   let data = {
-                      app_base_dir : '/home/ankush/Documents/Projects/Nodejs/libs/node2log/test/',  
-                      output_file : '/home/ankush/Documents/Projects/Nodejs/libs/node2log/test/log/output.log',
-                      error_file : '/home/ankush/Documents/Projects/Nodejs/libs/node2log/test/log/error.log', 
+                      app_base_dir : __dirname,  
+                      output_file : __dirname+'/log/output.log',
+                      error_file : __dirname+'/log/error.log', 
                   };
 
                   fs.writeFile(filepath,JSON.stringify(data))
@@ -177,9 +177,9 @@ describe('Logger',() => {
       
                   let filepath = __dirname + '/node2log7.json';
                   let data = {
-                      app_base_dir : '/home/ankush/Documents/Projects/Nodejs/libs/node2log/test/',  
-                      output_file : '/home/ankush/Documents/Projects/Nodejs/libs/node2log/test/log/output.log',
-                      error_file : '/home/ankush/Documents/Projects/Nodejs/libs/node2log/test/log/error.log', 
+                      app_base_dir : __dirname,  
+                      output_file : __dirname+'/log/output.log',
+                      error_file : __dirname+'/log/error.log', 
                       log_level : ''
                   };
 
@@ -196,9 +196,9 @@ describe('Logger',() => {
       
                   let filepath = __dirname + '/node2log8.json';
                   let data = {
-                      app_base_dir : '/home/ankush/Documents/Projects/Nodejs/libs/node2log/test/',  
-                      output_file : '/home/ankush/Documents/Projects/Nodejs/libs/node2log/test/log/output.log',
-                      error_file : '/home/ankush/Documents/Projects/Nodejs/libs/node2log/test/log/error.log', 
+                      app_base_dir : __dirname,  
+                      output_file : __dirname+'/log/output.log',
+                      error_file : __dirname+'/log/error.log', 
                       log_level : 'INFO'
                   };
 
@@ -215,9 +215,9 @@ describe('Logger',() => {
       
                   let filepath = __dirname + '/node2log9.json';
                   let data = {
-                      app_base_dir : '/home/ankush/Documents/Projects/Nodejs/libs/node2log/test/',
-                      output_file : '/home/ankush/Documents/Projects/Nodejs/libs/node2log/test/log/output.log',
-                      error_file : '/home/ankush/Documents/Projects/Nodejs/libs/node2log/test/log/error.log',
+                      app_base_dir : __dirname,
+                      output_file : __dirname+'/log/output.log',
+                      error_file : __dirname+'/log/error.log',
                       log_level : 'LOG_INFO_LEVEL'
                       };
 
@@ -236,9 +236,9 @@ describe('Logger',() => {
             let filepath = __dirname + '/node2log10.json';
 
             let data = {
-                app_base_dir : '/home/ankush/Documents/Projects/Nodejs/libs/node2log/test/',
-                output_file : '/home/ankush/Documents/Projects/Nodejs/libs/node2log/test/log/output.log',
-                error_file : '/home/ankush/Documents/Projects/Nodejs/libs/node2log/test/log/error.log',
+                app_base_dir : __dirname,
+                output_file : __dirname+'/log/output.log',
+                error_file : __dirname+'/log/error.log',
                 log_level : 'LOG_INFO_LEVEL'
             };
 
@@ -324,9 +324,9 @@ describe('Logger',() => {
                 let filepath = __dirname + '/node2log11.json';
 
                 let data = {
-                    app_base_dir : '/home/ankush/Documents/Projects/Nodejs/libs/node2log/test/',
-                    output_file : '/home/ankush/Documents/Projects/Nodejs/libs/node2log/test/log/output.log',
-                    error_file : '/home/ankush/Documents/Projects/Nodejs/libs/node2log/test/log/error.log',
+                    app_base_dir : __dirname,
+                    output_file : __dirname+'/log/output.log',
+                    error_file : __dirname+'/log/error.log',
                     log_level : 'LOG_NONE_LEVEL'
                 };
 
@@ -379,9 +379,9 @@ describe('Logger',() => {
                 let filepath = __dirname + '/node2log12.json';
 
                 let data = {
-                    app_base_dir : '/home/ankush/Documents/Projects/Nodejs/libs/node2log/test/',
-                    output_file : '/home/ankush/Documents/Projects/Nodejs/libs/node2log/test/log/output.log',
-                    error_file : '/home/ankush/Documents/Projects/Nodejs/libs/node2log/test/log/error.log',
+                    app_base_dir : __dirname,
+                    output_file : __dirname+'/log/output.log',
+                    error_file : __dirname+'/log/error.log',
                     log_level : 'LOG_DEBUG_LEVEL'
                 };
 
@@ -445,9 +445,9 @@ describe('Logger',() => {
             let filepath = __dirname + '/node2log13.json';
 
                 let data = {
-                    app_base_dir : '/home/ankush/Documents/Projects/Nodejs/libs/node2log/test/',
-                    output_file : '/home/ankush/Documents/Projects/Nodejs/libs/node2log/test/log/output1.log',
-                    error_file : '/home/ankush/Documents/Projects/Nodejs/libs/node2log/test/log/error1.log',
+                    app_base_dir : __dirname,
+                    output_file : __dirname+'/log/output1.log',
+                    error_file : __dirname+'/log/error1.log',
                     log_level : 'LOG_NONE_LEVEL'
                 };
 
@@ -486,9 +486,9 @@ describe('Logger',() => {
             let filepath = __dirname + '/node2log14.json';
 
             let data = {
-                app_base_dir : '/home/ankush/Documents/Projects/Nodejs/libs/node2log/test/',
-                output_file : '/home/ankush/Documents/Projects/Nodejs/libs/node2log/test/log/output2.log',
-                error_file : '/home/ankush/Documents/Projects/Nodejs/libs/node2log/test/log/error2.log',
+                app_base_dir : __dirname,
+                output_file : __dirname+'/log/output2.log',
+                error_file : __dirname+'/log/error2.log',
                 log_level : 'LOG_ERROR_LEVEL'
             };
 
@@ -558,9 +558,9 @@ describe('Logger',() => {
             let filepath = __dirname + '/node2log15.json';
 
             let data = {
-                app_base_dir : '/home/ankush/Documents/Projects/Nodejs/libs/node2log/test/',
-                output_file : '/home/ankush/Documents/Projects/Nodejs/libs/node2log/test/log/output3.log',
-                error_file : '/home/ankush/Documents/Projects/Nodejs/libs/node2log/test/log/error3.log',
+                app_base_dir : __dirname,
+                output_file : __dirname+'/log/output3.log',
+                error_file : __dirname+'/log/error3.log',
                 log_level : 'LOG_TRACE_LEVEL'
             };
 
@@ -655,9 +655,9 @@ describe('Logger',() => {
                 test.filepath = __dirname + '/node2log'+(16+index)+'.json';
 
                 test.data = {
-                    app_base_dir : '/home/ankush/Documents/Projects/Nodejs/libs/node2log/test/',
-                    output_file : '/home/ankush/Documents/Projects/Nodejs/libs/node2log/test/log/output'+(4+index)+'.log',
-                    error_file : '/home/ankush/Documents/Projects/Nodejs/libs/node2log/test/log/error'+(4+index)+'.log',
+                    app_base_dir : __dirname,
+                    output_file : __dirname+'/log/output'+(4+index)+'.log',
+                    error_file : __dirname+'/log/error'+(4+index)+'.log',
                     log_level : 'LOG_'+test.level+'_LEVEL'
                 };
 
