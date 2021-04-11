@@ -3,3 +3,4 @@ package-lock.json
 test/log/
 test/log.properties.json
 .nyc_output/
+coverage/

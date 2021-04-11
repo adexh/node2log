@@ -1,3 +1,7 @@
+# Node2Log
+
+[![Build Status](https://travis-ci.com/ankushTripathi/node2log.svg?branch=master)](https://travis-ci.com/ankushTripathi/node2log)
+
 # What is this?
 
 **Node2Log** is a simple logging library, that can be easily integrated with any node project.<br/>
