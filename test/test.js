@@ -1,6 +1,7 @@
 const chai = require('chai')
     ,expect = chai.expect
-    ,should = chai.should();
+    ,should = chai.should()
+    ,sinon = require('sinon');
 
 const fs = require('fs/promises');
 
@@ -11,19 +12,7 @@ describe('Logger',() => {
 
     describe('Constructor', () => {
 
-        const unlinkfile_cb = (err) => {
-            if(err) throw err;
-        }
-
         describe('Config file Input parameter test', () => {
-
-            after((done) => {
-
-                fs.unlink(__dirname+'/log/output.log')
-                .then(() => { return fs.unlink(__dirname+'/log/error.log')})
-                .then(done)
-                .catch(err => { throw err; });
-            });
 
             it('should throw error when no config file is set',() => {
 
@@ -44,10 +33,10 @@ describe('Logger',() => {
                   .then(() => {
 
                     expect(() => { new Logger(filepath) }).to.throw("please provide json propeties file");
+                    fs.unlink(filepath);
+                    done();
                   })
-                  .then(() => { return fs.unlink(filepath); })
-                  .then(done)
-                  .catch(err => { throw err; });
+                  .catch(done);
                   
               });
       
@@ -65,10 +54,10 @@ describe('Logger',() => {
                       .then(() => {
     
                         expect(() => { new Logger(filepath) }).to.throw("app_base_dir property required");
+                        fs.unlink(filepath);
+                        done();
                       })
-                      .then(() => { return fs.unlink(filepath); })
-                      .then(done)
-                      .catch(err => { throw err; });
+                      .catch(done);
 
               });
       
@@ -85,10 +74,10 @@ describe('Logger',() => {
                   fs.writeFile(filepath,JSON.stringify(data))
                       .then(() => {
                         expect(() => { new Logger(filepath) }).to.throw("app_base_dir property required");
+                        fs.unlink(filepath);
+                        done();
                       })
-                      .then(() => { return fs.unlink(filepath); })
-                      .then(done)
-                      .catch(err => { throw err; });
+                      .catch(done);
               });
       
               it('should throw error when config file is  missing output_file property', (done) => {
@@ -103,10 +92,10 @@ describe('Logger',() => {
                   fs.writeFile(filepath,JSON.stringify(data))
                       .then(() => {
                         expect(() => { new Logger(filepath) }).to.throw("output_file property required");
+                        fs.unlink(filepath);
+                        done();
                       })
-                      .then(() => { return fs.unlink(filepath); })
-                      .then(done)
-                      .catch(err => { throw err; });
+                      .catch(done);
               });
       
       
@@ -123,10 +112,10 @@ describe('Logger',() => {
                   fs.writeFile(filepath,JSON.stringify(data))
                       .then(() => {
                         expect(() => { new Logger(filepath) }).to.throw("output_file property required");
+                        fs.unlink(filepath);
+                        done();
                       })
-                      .then(() => { return fs.unlink(filepath); })
-                      .then(done)
-                      .catch(err => { throw err; });
+                      .catch(done);
                   });
       
               it('should throw error when config file is missing error_file property', (done) => {
@@ -141,10 +130,10 @@ describe('Logger',() => {
                   fs.writeFile(filepath,JSON.stringify(data))
                       .then(() => {
                         expect(() => { new Logger(filepath) }).to.throw("error_file property required");
+                        fs.unlink(filepath);
+                        done();
                       })
-                      .then(() => { return fs.unlink(filepath); })
-                      .then(done)
-                      .catch(err => { throw err; });
+                      .catch(done);
                   });
       
               it('should throw error when config file has empty error_file property', (done) => {
@@ -160,10 +149,10 @@ describe('Logger',() => {
                   fs.writeFile(filepath,JSON.stringify(data))
                       .then(() => {
                         expect(() => { new Logger(filepath) }).to.throw("error_file property required");
+                        fs.unlink(filepath);
+                        done();
                       })
-                      .then(() => { return fs.unlink(filepath); })
-                      .then(done)
-                      .catch(err => { throw err; });
+                      .catch(done);
                   });
       
               it('should throw error when config file is missing log_level property', (done) => {
@@ -178,10 +167,10 @@ describe('Logger',() => {
                   fs.writeFile(filepath,JSON.stringify(data))
                       .then(() => {
                         expect(() => { new Logger(filepath) }).to.throw("log_level property required");
+                        fs.unlink(filepath);
+                        done();
                       })
-                      .then(() => { return fs.unlink(filepath); })
-                      .then(done)
-                      .catch(err => { throw err; });
+                      .catch(done);
                 });
       
               it('should throw error when config file has empty log_level property', (done) => {
@@ -197,10 +186,10 @@ describe('Logger',() => {
                   fs.writeFile(filepath,JSON.stringify(data))
                       .then(() => {
                         expect(() => { new Logger(filepath) }).to.throw("log_level property required");
+                        fs.unlink(filepath);
+                        done();
                       })
-                      .then(() => { return fs.unlink(filepath); })
-                      .then(done)
-                      .catch(err => { throw err; });
+                      .catch(done);
               });
       
               it('should throw error when config file has incorrect log_level value', (done) => {
@@ -216,10 +205,10 @@ describe('Logger',() => {
                   fs.writeFile(filepath,JSON.stringify(data))
                       .then(() => {
                         expect(() => { new Logger(filepath) }).to.throw("please provide proper log level");
+                        fs.unlink(filepath);
+                        done();
                       })
-                      .then(() => { return fs.unlink(filepath); })
-                      .then(done)
-                      .catch(err => { throw err; });
+                      .catch(done);
               });
       
               it('should not throw error when json file is given with required properties', (done) => {
@@ -235,10 +224,10 @@ describe('Logger',() => {
                     fs.writeFile(filepath,JSON.stringify(data))
                       .then(() => {
                         expect(() => { new Logger(filepath) }).to.not.throw();
+                        fs.unlink(filepath);
+                        done();
                       })
-                      .then(() => { return fs.unlink(filepath); })
-                      .then(done)
-                      .catch(err => { throw err; });
+                      .catch(done);
               });
         });
 
@@ -259,14 +248,14 @@ describe('Logger',() => {
 
                 fs.writeFile(filepath,JSON.stringify(data))
                 .then(done)
-                .catch(err => { throw err; });
+                .catch(done);
             });
 
             after(done =>{
 
                 fs.unlink(filepath)
                 .then(done)
-                .catch(err => { throw err; });
+                .catch(done);
             });
 
             beforeEach(() => {
@@ -276,10 +265,12 @@ describe('Logger',() => {
 
             afterEach(done => {
 
-                fs.unlink(data.output_file)
-                .then(() => fs.unlink(data.error_file))
-                .then(done)
-                .catch(err => { throw err; });
+                Promise.all([
+                    fs.unlink(data.output_file),
+                    fs.unlink(data.error_file)
+                ])
+                .then(() =>{ done(); })
+                .catch(done);
             });
 
             it('should create output log file and error log file in the path given in config file', (done) => {
@@ -346,17 +337,19 @@ describe('Logger',() => {
                     fs.writeFile(filepath,JSON.stringify(data))
                     .then(() => {log = new Logger(filepath);})
                     .then(done)
-                    .catch(err => { throw err; });
+                    .catch(done);
                 });
 
                 after(done => {
 
-                    fs.unlink(filepath)
-                    .then(() => { return fs.unlink(data.output_file)})
-                    .then(() => { return fs.unlink(data.error_file)})
-                    //.then(() => { return fs.unlink(filepath)})
-                    .then(done)
-                    .catch(err => { throw err; });
+                    Promise.all([
+
+                        fs.unlink(filepath),
+                        fs.unlink(data.output_file),
+                        fs.unlink(data.error_file)
+                    ])
+                    .then(() => { done() })
+                    .catch(done);
                 });
         
                 it('should not attach __stack variable in global scope', () => {
@@ -403,17 +396,19 @@ describe('Logger',() => {
                         log = new Logger(filepath);
                     })
                     .then(done)
-                    .catch(err => { throw err; });
+                    .catch(done);
                 });
 
                 after(done => {
 
-                    fs.unlink(filepath)
-                    .then(() => { return fs.unlink(data.output_file)})
-                    .then(() => { return fs.unlink(data.error_file)})
-                    //.then(() => { return fs.unlink(filepath)})
-                    .then(done)
-                    .catch(err => { throw err; });
+                    Promise.all([
+
+                        fs.unlink(filepath),
+                        fs.unlink(data.output_file),
+                        fs.unlink(data.error_file)
+                    ])
+                    .then(() => { done() })
+                    .catch(done);
                 });
         
                 it('should attach __stack variable in global scope', () => {
@@ -441,4 +436,342 @@ describe('Logger',() => {
         });
     });
 
+    describe('log method', () => {
+
+        let msg = "this is a message from ";
+
+        it("should not log when log_level is LOG_NONE_LEVEL", (done) => {
+
+            let filepath = __dirname + '/node2log13.json';
+
+                let data = {
+                    app_base_dir : '/home/ankush/Documents/Projects/Nodejs/libs/node2log/test/',
+                    output_file : '/home/ankush/Documents/Projects/Nodejs/libs/node2log/test/log/output1.log',
+                    error_file : '/home/ankush/Documents/Projects/Nodejs/libs/node2log/test/log/error1.log',
+                    log_level : 'LOG_NONE_LEVEL'
+                };
+
+                fs.writeFile(filepath,JSON.stringify(data))
+                .then(() => {
+                    
+                    let logger = new Logger(filepath);
+                    
+                    const test_log = () => {
+
+                       logger.log("TRACE",msg+"LOG"); 
+                    };
+
+                    test_log();
+                })
+                .then(() => { return fs.readFile(data.output_file) })
+                .then(contents => {
+                
+                    contents.should.be.empty;
+                })
+                .then(done)
+                .catch(done)
+                .finally(() => {
+
+                    return Promise.all([
+
+                        fs.unlink(data.error_file),
+                        fs.unlink(filepath),
+                        fs.unlink(data.output_file)
+                    ]);
+                });
+        });
+
+        it("should log to error log file when level_display is ERROR or FATAL", (done) => {
+
+            let filepath = __dirname + '/node2log14.json';
+
+            let data = {
+                app_base_dir : '/home/ankush/Documents/Projects/Nodejs/libs/node2log/test/',
+                output_file : '/home/ankush/Documents/Projects/Nodejs/libs/node2log/test/log/output2.log',
+                error_file : '/home/ankush/Documents/Projects/Nodejs/libs/node2log/test/log/error2.log',
+                log_level : 'LOG_ERROR_LEVEL'
+            };
+
+            let procces_id = process.pid
+                ,file_name = "test.js"
+                ,function_name = "test_log"
+                ,line_number = 517
+                ,dateTime_options = {year : 'numeric', month : 'long', day : 'numeric',  hour: 'numeric', minute: 'numeric', second: 'numeric', fractionalSecondDigits : 3}
+                , logs = [
+                    {level_display : "ERROR", msg : msg + "ERROR LOG"},
+                    {level_display : "FATAL", msg : msg + "FATAL LOG"}
+                ];
+
+            fs.writeFile(filepath,JSON.stringify(data))
+            .then(() => {
+                
+                let logger = new Logger(filepath);
+                
+                function test_log(){
+
+                   (() => { 
+                       for( let log of logs){
+                            log.dt = new Date().toLocaleString('en-US',dateTime_options);
+                           logger.log(log.level_display, log.msg);
+                       }
+                    })();
+                }
+
+                test_log();
+            })
+            .then(() => { return fs.readFile(data.output_file) })
+            .then(buffer => {
+            
+                buffer.should.be.empty;
+            })
+            .then(() => { return fs.readFile(data.error_file) })
+            .then(buffer => {
+            
+                    let contents = buffer.toString().split("\n");
+                    contents.should.have.length.greaterThanOrEqual(2);
+                    logs.forEach((log,index) => {
+
+                        contents[index].should.contain(log.dt.slice(0,-6));
+                        contents[index].should.contain(procces_id);
+                        contents[index].should.contain(file_name);
+                        contents[index].should.contain(line_number);
+                        contents[index].should.contain(function_name);
+                        contents[index].should.contains(log.level_display);
+                        contents[index].should.contain(log.msg);
+                    });
+            })
+            .then(done)
+            .catch(done)
+            .finally(() => {
+
+                return Promise.all([
+
+                    fs.unlink(data.error_file),
+                    fs.unlink(filepath),
+                    fs.unlink(data.output_file)
+                ]);
+            });
+        });
+
+        it("should log to output log file when level_display is not ERROR or FATAL", (done) => {
+
+            let filepath = __dirname + '/node2log15.json';
+
+            let data = {
+                app_base_dir : '/home/ankush/Documents/Projects/Nodejs/libs/node2log/test/',
+                output_file : '/home/ankush/Documents/Projects/Nodejs/libs/node2log/test/log/output3.log',
+                error_file : '/home/ankush/Documents/Projects/Nodejs/libs/node2log/test/log/error3.log',
+                log_level : 'LOG_TRACE_LEVEL'
+            };
+
+            let procces_id = process.pid
+                ,file_name = "test.js"
+                ,function_name = "test_log"
+                ,line_number = 591
+                ,dateTime_options = {year : 'numeric', month : 'long', day : 'numeric',  hour: 'numeric', minute: 'numeric', second: 'numeric', fractionalSecondDigits : 3}
+                , logs = [
+                    {level_display : "TRACE", msg : msg + "TRACE LOG"},
+                    {level_display : "DEBUG", msg : msg + "DEBUG LOG"},
+                    {level_display : "INFO", msg : msg + "INFO LOG"},
+                    {level_display : "WARN", msg : msg + "WARN LOG"},
+                ];
+
+            fs.writeFile(filepath,JSON.stringify(data))
+            .then(() => {
+                
+                let logger = new Logger(filepath);
+                
+                function test_log(){
+
+                   (() => { 
+                       for( let log of logs){
+                            log.dt = new Date().toLocaleString('en-US',dateTime_options);
+                           logger.log(log.level_display, log.msg);
+                       }
+                    })();
+                }
+
+                test_log();
+            })
+            .then(() => { return fs.readFile(data.error_file) })
+            .then(buffer => {
+            
+                buffer.should.be.empty;
+            })
+            .then(() => { return fs.readFile(data.output_file) })
+            .then(buffer => {
+            
+                    let contents = buffer.toString().split("\n");
+                    contents.should.have.length.greaterThanOrEqual(2);
+                    logs.forEach((log,index) => {
+
+                        contents[index].should.contain(log.dt.slice(0,-6));
+                        contents[index].should.contain(procces_id);
+                        contents[index].should.contain(file_name);
+                        contents[index].should.contain(line_number);
+                        contents[index].should.contain(function_name);
+                        contents[index].should.contains(log.level_display);
+                        contents[index].should.contain(log.msg);
+                    });
+            })
+            .then(done)
+            .catch(done)
+            .finally(() => {
+
+                return Promise.all([
+
+                    fs.unlink(data.error_file),
+                    fs.unlink(filepath),
+                    fs.unlink(data.output_file)
+                ]);
+            });
+        });
+    });
+
+    describe('logging levels test', () => {
+
+            let 
+            procces_id = process.pid
+            ,file_name = "test.js"
+            ,function_name = "test_log"
+            ,line_numbers = [667,668,669,670,671,672]
+            ,dateTime_options = {year : 'numeric', month : 'long', day : 'numeric',  hour: 'numeric', minute: 'numeric', second: 'numeric', fractionalSecondDigits : 3};
+
+        const msg = "This is a message from ";
+
+        let tests = [
+            {level : "TRACE", outfile : true}, 
+            {level : "DEBUG", outfile : true}, 
+            {level : "INFO", outfile : true},
+            {level : "WARN", outfile : true},
+            {level : "ERROR", outfile : false},
+            {level : "FATAL", outfile : false}
+        ];
+
+        tests.forEach((test,index) => {
+
+            beforeEach(done => {
+
+                test.filepath = __dirname + '/node2log'+(16+index)+'.json';
+
+                test.data = {
+                    app_base_dir : '/home/ankush/Documents/Projects/Nodejs/libs/node2log/test/',
+                    output_file : '/home/ankush/Documents/Projects/Nodejs/libs/node2log/test/log/output'+(4+index)+'.log',
+                    error_file : '/home/ankush/Documents/Projects/Nodejs/libs/node2log/test/log/error'+(4+index)+'.log',
+                    log_level : 'LOG_'+test.level+'_LEVEL'
+                };
+
+                let test_log = () => {
+
+                        test.datetime = new Date().toLocaleString('en-US',dateTime_options);
+                        test.logger.trace(msg+"TRACE");
+                        test.logger.debug(msg+"DEBUG");
+                        test.logger.info(msg+"INFO");
+                        test.logger.warn(msg+"WARN");
+                        test.logger.error(msg+"ERROR");
+                        test.logger.fatal(msg+"FATAL");
+                }
+
+                fs.writeFile(test.filepath,JSON.stringify(test.data))
+                .then(() => {
+                    
+                    test.logger = new Logger(test.filepath);
+                    test_log();
+                })
+                .then(done)
+                .catch(done);
+
+            });
+
+            afterEach(done => {
+
+                test.logger = null;
+
+                Promise.all([
+
+                    fs.unlink(test.data.error_file),
+                    fs.unlink(test.filepath),
+                    fs.unlink(test.data.output_file)
+                ])
+                .then(() => { done(); })
+                .catch(done);
+            });
+
+            it("should log all calls whose level is above "+test.level + " log level", done => {
+
+                Promise.all([
+
+                    fs.readFile(test.data.error_file)
+                    .then(buffer => {
+                    
+                        if(test.outfile){
+                            
+                            let contents = buffer.toString().split("\n");
+                            //console.log(contents);
+                            contents.should.have.length(2+1);
+
+                            tests
+                            .filter(t => !t.outfile)
+                            .forEach((t,i) => {
+
+                                contents[i].should.contain(t.datetime.slice(0,-6));
+                                contents[i].should.contain(procces_id);
+                                contents[i].should.contain(file_name);
+                                contents[i].should.contain(line_numbers[i+4]);
+                                contents[i].should.contain(function_name);
+                                contents[i].should.contains(t.level);
+                                contents[i].should.contain(msg+t.level);
+                            });
+                        }
+                        else{
+
+                            let contents = buffer.toString().split("\n");
+                            //console.log(contents);
+                            contents.should.have.length(2 - (index - 4) + 1);  // +1 for extra new line charecter
+                            
+                            tests
+                            .filter((t,i) => !t.outfile && i >= index)
+                            .forEach((t,i) => {
+
+                                contents[i].should.contain(t.datetime.slice(0,-6));
+                                contents[i].should.contain(procces_id);
+                                contents[i].should.contain(file_name);
+                                contents[i].should.contain(line_numbers[i+index]);
+                                contents[i].should.contain(function_name);
+                                contents[i].should.contains(t.level);
+                                contents[i].should.contain(msg+t.level);
+                            });
+                        }
+                    }),
+                    fs.readFile(test.data.output_file)
+                    .then(buffer => {
+                    
+                        if(!test.outfile)
+                            buffer.should.be.empty;
+                        else{
+
+                            let contents = buffer.toString().split("\n");
+                            //console.log(contents);
+                            contents.should.have.length(4 - index + 1);  // +1 for extra new line charecter
+                            tests
+                            .filter((t,i) => t.outfile && i >= index)
+                            .forEach((t,i) => {
+
+                                contents[i].should.contain(t.datetime.slice(0,-6));
+                                contents[i].should.contain(procces_id);
+                                contents[i].should.contain(file_name);
+                                contents[i].should.contain(line_numbers[i+index]);
+                                contents[i].should.contain(function_name);
+                                contents[i].should.contains(t.level);
+                                contents[i].should.contain(msg+t.level);
+                            });
+                        }
+                    })
+                    
+                ])
+                .then(() => done())
+                .catch(done);
+            });
+        });
+    });
 });
