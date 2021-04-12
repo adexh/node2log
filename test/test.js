@@ -1,7 +1,6 @@
 const chai = require('chai')
     ,expect = chai.expect
-    ,should = chai.should()
-    ,sinon = require('sinon');
+    ,should = chai.should();
 
 const fs = require('fs/promises');
 

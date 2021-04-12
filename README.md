@@ -52,9 +52,9 @@ Logging Levels in decreasing level of verbosity are :
 
 
 ```
-const Logger = require('Logger');
+const Logger = require('node2log');
 
-const logger = new Logger('logProperties.json');
+const logger = new Logger(__dirname+'/logProperties.json');
 
 logger.trace('entering function Student.findAll()');
 logger.debug(`student id value : ${id}`);

@@ -1,8 +1,8 @@
 {
   "name": "node2log",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "logging library for node projects",
-  "main": "logger.js",
+  "main": "src/logger.js",
   "directories": {
     "test": "test"
   },
@@ -26,7 +26,6 @@
     "chai": "^4.3.4",
     "coveralls": "^3.1.0",
     "mocha": "^8.3.2",
-    "nyc": "^15.1.0",
-    "sinon": "^10.0.0"
+    "nyc": "^15.1.0"
   }
 }
