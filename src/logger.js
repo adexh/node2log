@@ -15,12 +15,18 @@ class Logger{
         LOG_NONE_LEVEL : 7,
     };
 
-    constructor(properties_file){
+    constructor(properties_file, configFile="config/config.json"){
 
         assert(properties_file != undefined, Error("please provide config file name"));
         assert(path.extname(properties_file) === ".json","please provide json propeties file, check logProperties.json.example");
 
         const properties = require(properties_file);
+        let silent = false;
+        if(fs.existsSync(configFile)){
+              const config = require('../../../'+configFile);
+              assert(config.hasOwnProperty('n2log_silent') && typeof(config.n2log_silent)==='boolean',"n2log_silent property required, expects only boolean value")
+              silent=config.n2log_silent;
+        }
 
         assert(properties.hasOwnProperty('app_base_dir') && properties.app_base_dir.length > 0,"app_base_dir property required, check logProperties.json.example");
         assert(properties.hasOwnProperty('output_file') && properties.output_file.length > 0, "output_file property required, check logProperties.json.example");
@@ -39,6 +45,7 @@ class Logger{
         this.logger = new Console(out_stream,err_stream,false);
         this.log_level = Logger.LOG_LEVELS[properties.log_level];
         this.app_base_dir = properties.app_base_dir;
+        this.silent = silent;
 
         if(this.log_level != Logger.LOG_LEVELS.LOG_NONE_LEVEL){
 
@@ -47,7 +54,8 @@ class Logger{
     }
 
     log(level_display,msg){
-
+        if(this.silent)
+            return ;
         if(this.log_level === Logger.LOG_LEVELS.LOG_NONE_LEVEL)
             return ;
 
